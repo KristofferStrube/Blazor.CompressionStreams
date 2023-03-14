@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KristofferStrube.Blazor.CompressionStreams", "src\KristofferStrube.Blazor.CompressionStreams\KristofferStrube.Blazor.CompressionStreams.csproj", "{702D5289-2557-46C5-8A0A-882C38BC8A0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KristofferStrube.Blazor.CompressionStreams.WasmExample", "samples\KristofferStrube.Blazor.CompressionStreams.WasmExample\KristofferStrube.Blazor.CompressionStreams.WasmExample.csproj", "{8FC026D8-7B6F-4805-8863-8BAAFAADC54C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{702D5289-2557-46C5-8A0A-882C38BC8A0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{702D5289-2557-46C5-8A0A-882C38BC8A0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{702D5289-2557-46C5-8A0A-882C38BC8A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{702D5289-2557-46C5-8A0A-882C38BC8A0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FC026D8-7B6F-4805-8863-8BAAFAADC54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FC026D8-7B6F-4805-8863-8BAAFAADC54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FC026D8-7B6F-4805-8863-8BAAFAADC54C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FC026D8-7B6F-4805-8863-8BAAFAADC54C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2ABBC11-C2D5-4B78-87ED-02B8C1D70710}
+	EndGlobalSection
+EndGlobal
