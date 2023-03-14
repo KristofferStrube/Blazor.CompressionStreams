@@ -16,9 +16,9 @@ public abstract class BaseJSWrapper : IAsyncDisposable
     /// <param name="jSReference">A JS reference to an existing JS instance that should be wrapped..</param>
     internal BaseJSWrapper(IJSRuntime jSRuntime, IJSObjectReference jSReference)
     {
-        helperTask = new(() => jSRuntime.GetHelperAsync());
+        helperTask = new(jSRuntime.GetHelperAsync);
         JSReference = jSReference;
-        this.JSRuntime = jSRuntime;
+        JSRuntime = jSRuntime;
     }
 
     public async ValueTask DisposeAsync()
