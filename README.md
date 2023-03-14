@@ -53,7 +53,7 @@ var existingDecompressionStream = await DecompressionStream.CreateAsync(JSRuntim
 ## Using `CompressionStream` and `DecompressionStream`
 The primary usage of the `CompressionStream`s and `DecompressionStream`s are in combination with the [Blazor.Streams](https://github.com/KristofferStrube/Blazor.Streams) library where the `ReadableStream` can be piped through any stream that implements the `IGenericTransformStream` interface which both `CompressionStream` and `DecompressionStream` does.
 
-```
+```csharp
 ReadableStream readableStream;
 
 ReadableStream compressed = await readableStream.PipeThroughAsync(newCompressionStream);
