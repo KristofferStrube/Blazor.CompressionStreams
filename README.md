@@ -3,7 +3,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/KristofferStrube/Blazor.CompressionStreams)](https://github.com/KristofferStrube/Blazor.CompressionStreams/network/members)
 [![GitHub stars](https://img.shields.io/github/stars/KristofferStrube/Blazor.CompressionStreams)](https://github.com/KristofferStrube/Blazor.CompressionStreams/stargazers)
 
-<!--[![NuGet Downloads (official NuGet)](https://img.shields.io/nuget/dt/KristofferStrube.Blazor.CompressionStreams?label=NuGet%20Downloads)](https://www.nuget.org/packages/KristofferStrube.Blazor.CompressionStreams/) -->
+[![NuGet Downloads (official NuGet)](https://img.shields.io/nuget/dt/KristofferStrube.Blazor.CompressionStreams?label=NuGet%20Downloads)](https://www.nuget.org/packages/KristofferStrube.Blazor.CompressionStreams/)
 
 # Introduction
 A Blazor wrapper for the browser API [Compression Streams](https://wicg.github.io/compression/)
