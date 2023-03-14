@@ -22,7 +22,7 @@ The package can be used in Blazor projects.
 ## Prerequisites
 You need to install .NET 7.0 or newer to use the library.
 
-[Download .NET 6](https://dotnet.microsoft.com/download/dotnet/7.0)
+[Download .NET 7](https://dotnet.microsoft.com/download/dotnet/7.0)
 
 ## Installation
 You can install the package via Nuget with the Package Manager in your IDE or alternatively using the command line:
