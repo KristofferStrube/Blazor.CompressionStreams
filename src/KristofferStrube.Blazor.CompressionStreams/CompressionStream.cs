@@ -11,9 +11,9 @@ public class CompressionStream : BaseJSWrapper, IGenericTransformStream
     /// <param name="jSRuntime">An <see cref="IJSRuntime"/> instance.</param>
     /// <param name="jSReference">A JS reference to an existing <see cref="CompressionStream"/>.</param>
     /// <returns>A wrapper instance for a <see cref="CompressionStream"/>.</returns>
-    public static async Task<CompressionStream> CreateAsync(IJSRuntime jSRuntime, IJSObjectReference jSReference)
+    public static Task<CompressionStream> CreateAsync(IJSRuntime jSRuntime, IJSObjectReference jSReference)
     {
-        return await Task.FromResult(new CompressionStream(jSRuntime, jSReference));
+        return Task.FromResult(new CompressionStream(jSRuntime, jSReference));
     }
 
     /// <summary>
@@ -22,26 +22,26 @@ public class CompressionStream : BaseJSWrapper, IGenericTransformStream
     /// <param name="jSRuntime">An <see cref="IJSRuntime"/> instance.</param>
     /// <param name="format">A valid compression format i.e. deflate, deflate-raw or gzip</param>
     /// <returns>A wrapper instance for a <see cref="CompressionStream"/>.</returns>
-    public static async Task<CompressionStream> CreateAsync(IJSRuntime jSRuntime, CompressionAlgorithm format)
-    {
-        IJSObjectReference helper = await jSRuntime.GetHelperAsync();
-        IJSObjectReference jSInstance = await helper.InvokeAsync<IJSObjectReference>("createCompressionStream", format.AsString());
-        return await Task.FromResult(new CompressionStream(jSRuntime, jSInstance));
-    }
+public static async Task<CompressionStream> CreateAsync(IJSRuntime jSRuntime, CompressionAlgorithm format)
+{
+    IJSObjectReference helper = await jSRuntime.GetHelperAsync();
+    IJSObjectReference jSInstance = await helper.InvokeAsync<IJSObjectReference>("createCompressionStream", format.AsString());
+    return new CompressionStream(jSRuntime, jSInstance);
+}
 
-    private CompressionStream(IJSRuntime jSRuntime, IJSObjectReference jSReference) : base(jSRuntime, jSReference) { }
+    protected CompressionStream(IJSRuntime jSRuntime, IJSObjectReference jSReference) : base(jSRuntime, jSReference) { }
 
     public async Task<ReadableStream> GetReadableAsync()
     {
         IJSObjectReference helper = await helperTask.Value;
         IJSObjectReference jSInstance = await helper.InvokeAsync<IJSObjectReference>("getAttribute", JSReference, "readable");
-        return ReadableStream.Create(JSRuntime, jSInstance);
+        return await ReadableStream.CreateAsync(JSRuntime, jSInstance);
     }
 
     public async Task<WritableStream> GetWritableAsync()
     {
         IJSObjectReference helper = await helperTask.Value;
         IJSObjectReference jSInstance = await helper.InvokeAsync<IJSObjectReference>("getAttribute", JSReference, "writable");
-        return WritableStream.Create(JSRuntime, jSInstance);
+        return await WritableStream.CreateAsync(JSRuntime, jSInstance);
     }
 }

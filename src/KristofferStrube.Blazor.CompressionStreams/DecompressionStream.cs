@@ -35,13 +35,13 @@ public class DecompressionStream : BaseJSWrapper, IGenericTransformStream
     {
         IJSObjectReference helper = await helperTask.Value;
         IJSObjectReference jSInstance = await helper.InvokeAsync<IJSObjectReference>("getAttribute", JSReference, "readable");
-        return ReadableStream.Create(JSRuntime, jSInstance);
+        return await ReadableStream.CreateAsync(JSRuntime, jSInstance);
     }
 
     public async Task<WritableStream> GetWritableAsync()
     {
         IJSObjectReference helper = await helperTask.Value;
         IJSObjectReference jSInstance = await helper.InvokeAsync<IJSObjectReference>("getAttribute", JSReference, "writable");
-        return WritableStream.Create(JSRuntime, jSInstance);
+        return await WritableStream.CreateAsync(JSRuntime, jSInstance);
     }
 }

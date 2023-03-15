@@ -7,13 +7,13 @@ public enum CompressionAlgorithm
     Gzip
 }
 
-public static class CompressionAlgorithmsExtensions
+public static class CompressionAlgorithmExtensions
 {
     public static string AsString(this CompressionAlgorithm compressionAlgorithm) => compressionAlgorithm switch
     {
         CompressionAlgorithm.Deflate => "deflate",
         CompressionAlgorithm.DeflateRaw => "deflate-raw",
         CompressionAlgorithm.Gzip => "gzip",
-        _ => throw new NotSupportedException($"format {compressionAlgorithm.ToString()} not supported as a Compression Algorithms"),
+        _ => throw new NotSupportedException($"Value {compressionAlgorithm} not supported as a Compression Algorithm format."),
     };
 }
