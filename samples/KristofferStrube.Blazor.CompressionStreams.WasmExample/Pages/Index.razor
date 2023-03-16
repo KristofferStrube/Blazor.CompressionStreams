@@ -5,6 +5,15 @@
 @inject IJSRuntime JSRuntime
 @inject HttpClient HttpClient
 
+In this sample we:
+<ol>
+    <li>Create a <code>ReadableStream</code> with an Lorem Ipsum text file as the source.</li>
+    <li>Create a <code>"gzip"</code> formatted <code>CompressionStream</code> and pipe the <code>ReadableStream</code> through this to make a compressed stream.</li>
+    <li><code>Tee</code> the compressed stream making two identical streams and measure the length of the first one by reading it.</li>
+    <li>Create a <code>"gzip"</code> formatted <code>DecompressionStream</code> and pipe the second compressed stream through this to decompress the stream.</li>
+    <li>Copy the final <code>ReadableStream</code> to a <code>MemoryStream</code> and read its content.</li>
+</ol>
+
 @if (compressedStreamSize is not 0)
 {
     <div><label style="width:200px;">Compressed size was:</label> @compressedStreamSize</div>
@@ -26,33 +35,33 @@
     protected override async Task OnInitializedAsync()
     {
         // Construct a ReadableStream from text file.
-var data = await HttpClient.GetStreamAsync("data/lorem.txt");
-var streamRef = new DotNetStreamReference(stream: data, leaveOpen: false);
-var jSStreamReference = await JSRuntime.InvokeAsync<IJSObjectReference>("jSStreamReference", streamRef);
-var readableStream = await ReadableStream.CreateAsync(JSRuntime, jSStreamReference);
+        var data = await HttpClient.GetStreamAsync("data/lorem.txt");
+        var streamRef = new DotNetStreamReference(stream: data, leaveOpen: false);
+        var jSStreamReference = await JSRuntime.InvokeAsync<IJSObjectReference>("jSStreamReference", streamRef);
+        var readableStream = await ReadableStream.CreateAsync(JSRuntime, jSStreamReference);
 
-// Pipe the ReabableStream throught a compression stream.
-var compressionStream = await CompressionStream.CreateAsync(JSRuntime, CompressionAlgorithm.DeflateRaw);
-var compressedStream = await readableStream.PipeThroughAsync(compressionStream);
+        // Pipe the ReabableStream throught a compression stream.
+        var compressionStream = await CompressionStream.CreateAsync(JSRuntime, CompressionAlgorithm.DeflateRaw);
+        var compressedStream = await readableStream.PipeThroughAsync(compressionStream);
 
-// Tee the ReadableStream in 2 streams.
-var (tee1, tee2) = await compressedStream.TeeAsync();
+        // Tee the ReadableStream in 2 streams.
+        var (tee1, tee2) = await compressedStream.TeeAsync();
 
-// Get the total length of the first stream.
-var reader = await tee1.GetDefaultReaderAsync();
-await foreach (var byteArrayChunk in reader.IterateByteArraysAsync())
-{
-    compressedStreamSize += byteArrayChunk.Length;
-}
+        // Get the total length of the first stream.
+        var reader = await tee1.GetDefaultReaderAsync();
+        await foreach (var byteArrayChunk in reader.IterateByteArraysAsync())
+        {
+            compressedStreamSize += byteArrayChunk.Length;
+        }
 
-// Pipe the second compressed stream through decompression stream.
+        // Pipe the second compressed stream through decompression stream.
         var decompressionStream = await DecompressionStream.CreateAsync(JSRuntime, CompressionAlgorithm.DeflateRaw);
-var decompressedStream = await tee2.PipeThroughAsync(decompressionStream);
+        var decompressedStream = await tee2.PipeThroughAsync(decompressionStream);
 
-// Wirte the decompressed stream to a MemoryStream and read it.
-var writeStream = new System.IO.MemoryStream();
-await decompressedStream.CopyToAsync(writeStream);
-decompressedStreamSize = writeStream.Length;
-content = System.Text.Encoding.UTF8.GetString(writeStream.ToArray());
+        // Write the decompressed stream to a MemoryStream and read it.
+        var writeStream = new System.IO.MemoryStream();
+        await decompressedStream.CopyToAsync(writeStream);
+        decompressedStreamSize = writeStream.Length;
+        content = System.Text.Encoding.UTF8.GetString(writeStream.ToArray());
     }
 }
