@@ -69,6 +69,7 @@ Feel free to open issues on the repository if you find any errors with the packa
 # Related articles
 This repository was build with inspiration and help from the following series of articles:
 
+- [Wrapping Compression Streams in Blazor](https://kristoffer-strube.dk/post/wrapping-compression-streams-in-blazor/)
 - [Wrapping JavaScript libraries in Blazor WebAssembly/WASM](https://blog.elmah.io/wrapping-javascript-libraries-in-blazor-webassembly-wasm/)
 - [Call anonymous C# functions from JS in Blazor WASM](https://blog.elmah.io/call-anonymous-c-functions-from-js-in-blazor-wasm/)
 - [Using JS Object References in Blazor WASM to wrap JS libraries](https://blog.elmah.io/using-js-object-references-in-blazor-wasm-to-wrap-js-libraries/)
